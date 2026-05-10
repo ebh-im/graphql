@@ -1,0 +1,269 @@
+/* ── Base ─────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: #0f172a;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+/* ── LoginPage ────────────────────────────────────────── */
+.login-page {
+  min-height: 100vh;
+  background: #020617;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+}
+
+/* ── LoginForm ────────────────────────────────────────── */
+.login-form {
+  width: 100%;
+  max-width: 28rem;
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3),
+    0 4px 6px -4px rgba(0, 0, 0, 0.2);
+}
+
+.login-form__title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  margin: 0 0 1.5rem 0;
+}
+
+.login-form__input {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background: #1e293b;
+  color: white;
+  border: 1px solid #334155;
+  outline: none;
+  font-size: 1rem;
+}
+
+.login-form__error {
+  color: #f87171;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.login-form__btn {
+  width: 100%;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.login-form__btn:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.login-form__btn:disabled {
+  background: #1e3a8a;
+  cursor: not-allowed;
+}
+
+/* ── ProfilePage ──────────────────────────────────────── */
+.profile-page {
+  min-height: 100vh;
+  background: #020617;
+  color: white;
+  padding: 2rem;
+}
+
+.profile-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.profile-top-bar__title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.profile-top-bar__subtitle {
+  color: #94a3b8;
+  margin: 0.25rem 0 0 0;
+}
+
+.logout-btn {
+  background: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.logout-btn:hover {
+  background: #b91c1c;
+}
+
+.loading-text {
+  color: #94a3b8;
+}
+
+.error-text {
+  color: #f87171;
+}
+
+/* ── Basic Info card ──────────────────────────────────── */
+.basic-info {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.basic-info__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+}
+
+.basic-info__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .basic-info__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.basic-info__item {
+  color: #cbd5e1;
+  margin: 0;
+}
+
+.basic-info__label {
+  color: #64748b;
+}
+
+/* ── Stats grid ───────────────────────────────────────── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ── InfoCard ─────────────────────────────────────────── */
+.info-card {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 1rem;
+  padding: 1.25rem;
+}
+
+.info-card__title {
+  color: #94a3b8;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.info-card__value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  margin: 0.5rem 0 0 0;
+}
+
+.info-card__description {
+  color: #64748b;
+  font-size: 0.875rem;
+  margin: 0.5rem 0 0 0;
+}
+
+/* ── Chart cards (shared) ─────────────────────────────── */
+.chart-card {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.chart-header {
+  margin-bottom: 1.5rem;
+}
+
+.chart-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+}
+
+.chart-subtitle {
+  color: #94a3b8;
+  margin: 0;
+}
+
+/* ── XPOverTime tooltip ───────────────────────────────── */
+.chart-relative {
+  position: relative;
+}
+
+.chart-tooltip {
+  position: absolute;
+  z-index: 10;
+  background: #020617;
+  border: 1px solid #334155;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3),
+    0 8px 10px -6px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+}
+
+.chart-tooltip__title {
+  font-weight: 600;
+  color: white;
+  margin: 0 0 0.25rem 0;
+}
+
+.chart-tooltip__detail {
+  color: #94a3b8;
+  margin: 0.1rem 0;
+}
+
+.chart-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
