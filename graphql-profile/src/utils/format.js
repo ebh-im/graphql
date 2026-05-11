@@ -4,6 +4,14 @@ export function formatXP(value) {
   return `${value} B`
 }
 
+export function formatDate(dateString) {
+  return new Date(dateString).toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  })
+}
+
 export function getProjectName(path) {
   return path.split("/").pop()
 }

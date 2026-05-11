@@ -1,13 +1,12 @@
 const AUTH_URL = "https://learn.reboot01.com/api/auth/signin"
 
 export async function login(identifier, password) {
-  const credentials = `${identifier}:${password}`
-  const encodedCredentials = btoa(credentials)
+  const encoded = btoa(`${identifier}:${password}`)
 
   const response = await fetch(AUTH_URL, {
     method: "POST",
     headers: {
-      Authorization: `Basic ${encodedCredentials}`,
+      Authorization: `Basic ${encoded}`,
     },
   })
 
@@ -17,7 +16,6 @@ export async function login(identifier, password) {
 
   const token = await response.json()
   localStorage.setItem("jwt", token)
-
   return token
 }
 
@@ -27,4 +25,15 @@ export function getToken() {
 
 export function logout() {
   localStorage.removeItem("jwt")
+}
+
+export function decodeToken() {
+  const token = getToken()
+  if (!token) return null
+  try {
+    const payload = token.split(".")[1]
+    return JSON.parse(atob(payload))
+  } catch {
+    return null
+  }
 }

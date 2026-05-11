@@ -28,31 +28,33 @@ export default function XPOverTimeChart({ transactions }) {
     return `${value} B`
   }
 
-  function formatDate(dateString) {
+  function formatMonth(dateString) {
     return new Date(dateString).toLocaleDateString("en-GB", {
-      day: "2-digit",
       month: "short",
       year: "numeric",
     })
   }
 
+  // Aggregate XP per calendar month
+  const monthMap = {}
+  for (const t of transactions) {
+    const d = new Date(t.createdAt)
+    const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`
+    if (!monthMap[key]) monthMap[key] = { key, amount: 0, date: t.createdAt }
+    monthMap[key].amount += t.amount
+  }
+
+  const months = Object.values(monthMap).sort((a, b) =>
+    a.key.localeCompare(b.key)
+  )
+
   let runningTotal = 0
-
-  const points = transactions.map((transaction, index) => {
-    runningTotal += transaction.amount
-
+  const points = months.map((m, index) => {
+    runningTotal += m.amount
     const x =
       padding +
-      (index / (transactions.length - 1 || 1)) *
-        (width - padding * 2)
-
-    return {
-      x,
-      amount: transaction.amount,
-      xp: runningTotal,
-      date: transaction.createdAt,
-      path: transaction.path,
-    }
+      (index / (months.length - 1 || 1)) * (width - padding * 2)
+    return { x, amount: m.amount, xp: runningTotal, date: m.date }
   })
 
   const maxXp = Math.max(...points.map((point) => point.xp))
@@ -62,11 +64,7 @@ export default function XPOverTimeChart({ transactions }) {
       height -
       padding -
       (point.xp / maxXp) * (height - padding * 2)
-
-    return {
-      ...point,
-      y,
-    }
+    return { ...point, y }
   })
 
   const linePoints = pointsWithPosition
@@ -75,8 +73,8 @@ export default function XPOverTimeChart({ transactions }) {
 
   const gridLines = [0, 25, 50, 75, 100]
 
-  const firstDate = formatDate(transactions[0].createdAt)
-  const lastDate = formatDate(transactions[transactions.length - 1].createdAt)
+  const firstDate = formatMonth(months[0].date)
+  const lastDate = formatMonth(months[months.length - 1].date)
 
   return (
     <div className="chart-card">
@@ -107,7 +105,7 @@ export default function XPOverTimeChart({ transactions }) {
             </p>
 
             <p className="chart-tooltip__detail">
-              Date: {formatDate(hoveredPoint.date)}
+              Month: {formatMonth(hoveredPoint.date)}
             </p>
           </div>
         )}
@@ -165,6 +163,7 @@ export default function XPOverTimeChart({ transactions }) {
             points={linePoints}
             fill="none"
             stroke="#38bdf8"
+            opacity={0.5}
             strokeWidth="3"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -176,9 +175,9 @@ export default function XPOverTimeChart({ transactions }) {
               cx={point.x}
               cy={point.y}
               r={hoveredPoint === point ? 6 : 4}
-              fill="#38bdf8"
-              stroke="#0f172a"
-              strokeWidth="2"
+              fill="#a78bfa"
+              stroke="#000000"
+              strokeWidth="0.5"
               style={{ cursor: "pointer" }}
               onMouseEnter={() => setHoveredPoint(point)}
               onMouseLeave={() => setHoveredPoint(null)}

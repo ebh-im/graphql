@@ -1,6 +1,7 @@
 import { useState } from "react"
 import LoginPage from "./pages/LoginPage"
 import ProfilePage from "./pages/ProfilePage"
+import AnimatedBackground from "./components/AnimatedBackground"
 import { getToken, logout } from "./services/auth"
 
 export default function App() {
@@ -15,9 +16,15 @@ export default function App() {
     setIsLoggedIn(false)
   }
 
-  if (isLoggedIn) {
-    return <ProfilePage onLogout={handleLogout} />
-  }
-
-  return <LoginPage onLogin={handleLogin} />
+  return (
+    <>
+      <AnimatedBackground />
+      <div className="app-content">
+        {isLoggedIn
+          ? <ProfilePage onLogout={handleLogout} />
+          : <LoginPage onLogin={handleLogin} />
+        }
+      </div>
+    </>
+  )
 }

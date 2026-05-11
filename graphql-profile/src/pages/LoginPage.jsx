@@ -22,11 +22,23 @@ export default function LoginPage({ onLogin }) {
 
   return (
     <div className="login-page">
-      <LoginForm
-        onSubmit={handleLogin}
-        loading={loading}
-        error={error}
-      />
+      {/* Decorative glass shapes */}
+      <div className="glass-shapes" aria-hidden="true">
+        <div className="glass-shape glass-shape--1" />
+        <div className="glass-shape glass-shape--2" />
+        <div className="glass-shape glass-shape--3" />
+        <div className="glass-shape glass-shape--4" />
+        <div className="glass-shape glass-shape--5" />
+      </div>
+
+      <div className="login-page__brand">
+        <h1 className="login-page__brand-title">
+          Reboot<span>01</span>
+        </h1>
+        <p className="login-page__brand-sub">Student Profile Dashboard</p>
+      </div>
+
+      <LoginForm onSubmit={handleLogin} loading={loading} error={error} />
     </div>
   )
 }

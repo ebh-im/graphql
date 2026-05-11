@@ -10,13 +10,15 @@ export default function XPByProjectChart({ projects }) {
     )
   }
 
+  const top5 = projects.slice(0, 5)
+
   const width = 800
   const barHeight = 34
   const gap = 14
   const padding = 60
-  const height = padding * 2 + projects.length * (barHeight + gap)
+  const height = padding * 2 + top5.length * (barHeight + gap)
 
-  const maxXP = Math.max(...projects.map((project) => project.xp))
+  const maxXP = Math.max(...top5.map((project) => project.xp))
 
   return (
     <div className="chart-card">
@@ -26,7 +28,7 @@ export default function XPByProjectChart({ projects }) {
       </p>
 
       <svg viewBox={`0 0 ${width} ${height}`} className="chart-svg">
-        {projects.map((project, index) => {
+        {top5.map((project, index) => {
           const y = padding + index * (barHeight + gap)
           const barWidth = (project.xp / maxXP) * (width - padding * 2)
 
