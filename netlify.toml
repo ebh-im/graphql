@@ -1,8 +1,9 @@
-[build]
-  command = "npm run build"
-  publish = "dist"
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+	[build]
+   base    = "graphql-profile"
+   command = "npm run build"
+   publish = "graphql-profile/dist"
+ 
+ [[redirects]]
+   from   = "/*"
+   to     = "/index.html"
+   status = 200
