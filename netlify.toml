@@ -1,7 +1,7 @@
 	[build]
    base    = "graphql-profile"
    command = "npm run build"
-   publish = "graphql-profile/dist"
+   publish = "dist"
  
  [[redirects]]
    from   = "/*"
