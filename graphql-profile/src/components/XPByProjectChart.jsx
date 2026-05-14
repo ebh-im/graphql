@@ -14,7 +14,7 @@ export default function XPByProjectChart({ projects }) {
 
   const width = 800
   const barHeight = 34
-  const gap = 14
+  const gap = 34
   const padding = 60
   const height = padding * 2 + top5.length * (barHeight + gap)
 
